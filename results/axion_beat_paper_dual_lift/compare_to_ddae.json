@@ -1,0 +1,755 @@
+{
+  "time": "2026-08-16T03:22:46.913010+00:00",
+  "run_id": "axion_beat_paper_dual_lift",
+  "claim": "beat_paper_dual_lift",
+  "paper": {
+    "unsupervised": {
+      "PR-AUC": 32.77,
+      "ROC-AUC": 74.08
+    },
+    "semi-supervised": {
+      "PR-AUC": 61.36,
+      "ROC-AUC": 83.17
+    }
+  },
+  "targets": {
+    "semi-supervised": {
+      "PR-AUC": 68.0,
+      "ROC-AUC": 88.0
+    },
+    "unsupervised": {
+      "PR-AUC": 45.0,
+      "ROC-AUC": 88.0
+    }
+  },
+  "macro": {
+    "semi-supervised": {
+      "PR-AUC": 68.16266143394651,
+      "ROC-AUC": 89.38386171018362,
+      "delta_PR_vs_paper": 6.802661433946511,
+      "delta_ROC_vs_paper": 6.213861710183622,
+      "n_datasets": 57,
+      "pass_paper": true
+    },
+    "unsupervised": {
+      "PR-AUC": 46.67684637895528,
+      "ROC-AUC": 84.51722602096478,
+      "delta_PR_vs_paper": 13.90684637895528,
+      "delta_ROC_vs_paper": 10.437226020964786,
+      "n_datasets": 57,
+      "pass_paper": true
+    }
+  },
+  "gates": {
+    "G_bp_semi_pr": true,
+    "G_bp_semi_roc": true,
+    "G_bp_unsup_pr": true,
+    "G_bp_unsup_roc": false,
+    "G_bp_12probe": true,
+    "G_bp_integrity": true,
+    "G_bp_claim_margin": true
+  },
+  "per_dataset": {
+    "semi-supervised": [
+      {
+        "dataset": "20newsgroups",
+        "PR-AUC": 36.55239995117796,
+        "ROC-AUC": 89.34689333940368,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "ALOI",
+        "PR-AUC": 18.813414027606928,
+        "ROC-AUC": 77.11368709323122,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Agnews",
+        "PR-AUC": 57.83905152711625,
+        "ROC-AUC": 88.99995789473684,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Amazon",
+        "PR-AUC": 35.675285527223025,
+        "ROC-AUC": 89.42922105263158,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "CIFAR10",
+        "PR-AUC": 91.09991002701128,
+        "ROC-AUC": 98.18334600760457,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Cardiotocography",
+        "PR-AUC": 76.72301617432223,
+        "ROC-AUC": 83.91222030084586,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "FashionMNIST",
+        "PR-AUC": 91.27424657868974,
+        "ROC-AUC": 98.42881481481481,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Hepatitis",
+        "PR-AUC": 68.75718484414135,
+        "ROC-AUC": 83.37104072398189,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Imdb",
+        "PR-AUC": 31.04962300355284,
+        "ROC-AUC": 87.63734736842106,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "InternetAds",
+        "PR-AUC": 90.6785984524712,
+        "ROC-AUC": 92.79364150840725,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Ionosphere",
+        "PR-AUC": 97.55581535050922,
+        "ROC-AUC": 96.8534906588004,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Lymphography",
+        "PR-AUC": 88.57142857142857,
+        "ROC-AUC": 98.59154929577466,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "MNIST-C",
+        "PR-AUC": 73.93386401845152,
+        "ROC-AUC": 94.23463421052631,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "MVTec-AD",
+        "PR-AUC": 97.17230428628926,
+        "ROC-AUC": 98.41460732607742,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "PageBlocks",
+        "PR-AUC": 89.15624092308657,
+        "ROC-AUC": 97.39983298806827,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Pima",
+        "PR-AUC": 73.12762216548207,
+        "ROC-AUC": 75.85970149253731,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "SVHN",
+        "PR-AUC": 35.38320426422877,
+        "ROC-AUC": 84.2126189896367,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "SpamBase",
+        "PR-AUC": 89.45143467470331,
+        "ROC-AUC": 84.30245926975822,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Stamps",
+        "PR-AUC": 66.30539432214412,
+        "ROC-AUC": 95.52549427679502,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "WBC",
+        "PR-AUC": 94.33119658119658,
+        "ROC-AUC": 99.4392523364486,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "WDBC",
+        "PR-AUC": 93.54365079365078,
+        "ROC-AUC": 99.66480446927375,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "WPBC",
+        "PR-AUC": 45.82030459679782,
+        "ROC-AUC": 54.339305711086226,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Waveform",
+        "PR-AUC": 40.94374131850046,
+        "ROC-AUC": 78.84449760765551,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Wilt",
+        "PR-AUC": 83.60600528007268,
+        "ROC-AUC": 96.90694742731787,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Yelp",
+        "PR-AUC": 33.7203424343579,
+        "ROC-AUC": 87.90311578947369,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "annthyroid",
+        "PR-AUC": 65.25755264942316,
+        "ROC-AUC": 91.54960439864212,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "backdoor",
+        "PR-AUC": 80.02126899607961,
+        "ROC-AUC": 94.42745375051362,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "breastw",
+        "PR-AUC": 98.33234444083067,
+        "ROC-AUC": 98.75984771382261,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "campaign",
+        "PR-AUC": 54.74788139716278,
+        "ROC-AUC": 80.94004212221624,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "cardio",
+        "PR-AUC": 76.56766220806672,
+        "ROC-AUC": 91.33522727272728,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "celeba",
+        "PR-AUC": 17.98382282836758,
+        "ROC-AUC": 77.1762068107475,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "census",
+        "PR-AUC": 21.79080484309749,
+        "ROC-AUC": 72.47467202178629,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "cover",
+        "PR-AUC": 42.44406448942148,
+        "ROC-AUC": 95.56849701542318,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "donors",
+        "PR-AUC": 76.91801564183326,
+        "ROC-AUC": 96.87220433813968,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "fault",
+        "PR-AUC": 80.37945309429094,
+        "ROC-AUC": 81.68050210695554,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "fraud",
+        "PR-AUC": 47.61488230773864,
+        "ROC-AUC": 95.07308054235315,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "glass",
+        "PR-AUC": 38.717143423025774,
+        "ROC-AUC": 89.42826321467098,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "http",
+        "PR-AUC": 95.40573320729074,
+        "ROC-AUC": 99.98284756596833,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "landsat",
+        "PR-AUC": 71.52174897159324,
+        "ROC-AUC": 76.86506593328065,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "letter",
+        "PR-AUC": 70.72793379075709,
+        "ROC-AUC": 90.95733333333334,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "magic.gamma",
+        "PR-AUC": 87.3200647371728,
+        "ROC-AUC": 84.3674802746036,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "mammography",
+        "PR-AUC": 36.8281994735882,
+        "ROC-AUC": 88.73292397825536,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "mnist",
+        "PR-AUC": 74.16573024004232,
+        "ROC-AUC": 93.7963913259394,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "musk",
+        "PR-AUC": 99.99999999999999,
+        "ROC-AUC": 100.0,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "optdigits",
+        "PR-AUC": 78.19761299605969,
+        "ROC-AUC": 99.22752993814976,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "pendigits",
+        "PR-AUC": 96.32982887704942,
+        "ROC-AUC": 99.92400113043544,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "satellite",
+        "PR-AUC": 89.35480670535915,
+        "ROC-AUC": 87.7517413823897,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "satimage-2",
+        "PR-AUC": 97.92413203621018,
+        "ROC-AUC": 99.89090158536705,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "shuttle",
+        "PR-AUC": 96.49748172695737,
+        "ROC-AUC": 99.84800732130017,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "skin",
+        "PR-AUC": 66.3714429540278,
+        "ROC-AUC": 89.32304452973136,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "smtp",
+        "PR-AUC": 66.94139659289569,
+        "ROC-AUC": 87.56596514097093,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "speech",
+        "PR-AUC": 11.308220180889988,
+        "ROC-AUC": 80.77093486929554,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "thyroid",
+        "PR-AUC": 82.25986477215716,
+        "ROC-AUC": 98.81486676016831,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "vertebral",
+        "PR-AUC": 34.88900183108396,
+        "ROC-AUC": 67.26984126984128,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "vowels",
+        "PR-AUC": 82.90460953604702,
+        "ROC-AUC": 98.23613086770982,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "wine",
+        "PR-AUC": 87.74281274281273,
+        "ROC-AUC": 97.83333333333333,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "yeast",
+        "PR-AUC": 56.72090434940622,
+        "ROC-AUC": 56.72769367908585,
+        "n_seeds": 1
+      }
+    ],
+    "unsupervised": [
+      {
+        "dataset": "20newsgroups",
+        "PR-AUC": 21.535917915492476,
+        "ROC-AUC": 89.10454840611361,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "ALOI",
+        "PR-AUC": 9.392907067325384,
+        "ROC-AUC": 75.67065242401303,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Agnews",
+        "PR-AUC": 26.229517386043355,
+        "ROC-AUC": 85.77940263157895,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Amazon",
+        "PR-AUC": 22.158018790069985,
+        "ROC-AUC": 90.28633684210526,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "CIFAR10",
+        "PR-AUC": 89.3976655088419,
+        "ROC-AUC": 99.23777946768061,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Cardiotocography",
+        "PR-AUC": 41.81628774857427,
+        "ROC-AUC": 66.31949508312846,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "FashionMNIST",
+        "PR-AUC": 88.9679649623395,
+        "ROC-AUC": 98.61071957671957,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Hepatitis",
+        "PR-AUC": 39.60730126097672,
+        "ROC-AUC": 64.98277841561423,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Imdb",
+        "PR-AUC": 19.15480959598442,
+        "ROC-AUC": 89.09662105263156,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "InternetAds",
+        "PR-AUC": 33.422525715904314,
+        "ROC-AUC": 67.22703651303259,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Ionosphere",
+        "PR-AUC": 92.0874175737357,
+        "ROC-AUC": 93.88359788359789,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Lymphography",
+        "PR-AUC": 95.83333333333334,
+        "ROC-AUC": 99.76525821596245,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "MNIST-C",
+        "PR-AUC": 65.30656976608266,
+        "ROC-AUC": 95.57923881578947,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "MVTec-AD",
+        "PR-AUC": 94.56953599978851,
+        "ROC-AUC": 98.05651634916555,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "PageBlocks",
+        "PR-AUC": 63.29389527017787,
+        "ROC-AUC": 93.79592262872791,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Pima",
+        "PR-AUC": 53.532190600750276,
+        "ROC-AUC": 71.53358208955224,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "SVHN",
+        "PR-AUC": 21.022858668743016,
+        "ROC-AUC": 82.7461445451625,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "SpamBase",
+        "PR-AUC": 49.96823139165014,
+        "ROC-AUC": 65.05501692538506,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Stamps",
+        "PR-AUC": 38.6637652066294,
+        "ROC-AUC": 92.3374047395344,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "WBC",
+        "PR-AUC": 58.26369902027797,
+        "ROC-AUC": 98.12206572769954,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "WDBC",
+        "PR-AUC": 63.71078431372549,
+        "ROC-AUC": 98.8515406162465,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "WPBC",
+        "PR-AUC": 24.378606502831946,
+        "ROC-AUC": 50.75383965055658,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Waveform",
+        "PR-AUC": 13.95874154425252,
+        "ROC-AUC": 79.12084953634461,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Wilt",
+        "PR-AUC": 35.08624785162044,
+        "ROC-AUC": 77.9186717546574,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "Yelp",
+        "PR-AUC": 21.666125969094303,
+        "ROC-AUC": 89.24397894736842,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "annthyroid",
+        "PR-AUC": 30.601111379915004,
+        "ROC-AUC": 79.98594803300554,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "backdoor",
+        "PR-AUC": 73.72264206276996,
+        "ROC-AUC": 91.41067466308398,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "breastw",
+        "PR-AUC": 83.27031895439312,
+        "ROC-AUC": 95.74899166949376,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "campaign",
+        "PR-AUC": 31.45050587526919,
+        "ROC-AUC": 76.3355187368147,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "cardio",
+        "PR-AUC": 45.80207935113769,
+        "ROC-AUC": 84.37208184564679,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "celeba",
+        "PR-AUC": 9.758003986188063,
+        "ROC-AUC": 75.81772164644359,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "census",
+        "PR-AUC": 8.876439823264935,
+        "ROC-AUC": 66.81948238045514,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "cover",
+        "PR-AUC": 3.935972678657349,
+        "ROC-AUC": 85.69881745699085,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "donors",
+        "PR-AUC": 27.50497321865868,
+        "ROC-AUC": 91.04444711271118,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "fault",
+        "PR-AUC": 55.43764196387224,
+        "ROC-AUC": 73.32480629602375,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "fraud",
+        "PR-AUC": 35.804211157170826,
+        "ROC-AUC": 94.46440875080013,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "glass",
+        "PR-AUC": 11.305262040680956,
+        "ROC-AUC": 80.10840108401084,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "http",
+        "PR-AUC": 98.496303089013,
+        "ROC-AUC": 99.99190446566682,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "landsat",
+        "PR-AUC": 25.28277534206388,
+        "ROC-AUC": 60.68992257864544,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "letter",
+        "PR-AUC": 47.58994936756193,
+        "ROC-AUC": 89.88466666666666,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "magic.gamma",
+        "PR-AUC": 73.41706198775002,
+        "ROC-AUC": 80.55387130304013,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "mammography",
+        "PR-AUC": 32.631597387485115,
+        "ROC-AUC": 89.78528017802941,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "mnist",
+        "PR-AUC": 47.632387789388936,
+        "ROC-AUC": 89.94238529831749,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "musk",
+        "PR-AUC": 99.92644211781293,
+        "ROC-AUC": 99.99756610629161,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "optdigits",
+        "PR-AUC": 8.447689120428093,
+        "ROC-AUC": 80.4904592709567,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "pendigits",
+        "PR-AUC": 37.49035815284737,
+        "ROC-AUC": 97.87289093589362,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "satellite",
+        "PR-AUC": 67.09940146189427,
+        "ROC-AUC": 75.14247969376858,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "satimage-2",
+        "PR-AUC": 96.92869000783053,
+        "ROC-AUC": 99.91105039167314,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "shuttle",
+        "PR-AUC": 77.31391088926581,
+        "ROC-AUC": 98.5868001042608,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "skin",
+        "PR-AUC": 30.057243945272432,
+        "ROC-AUC": 73.72525434107138,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "smtp",
+        "PR-AUC": 65.18719693212583,
+        "ROC-AUC": 88.66738150803496,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "speech",
+        "PR-AUC": 17.950520819427435,
+        "ROC-AUC": 75.12492933860938,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "thyroid",
+        "PR-AUC": 42.76834315855304,
+        "ROC-AUC": 97.89359544289444,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "vertebral",
+        "PR-AUC": 22.88099659656751,
+        "ROC-AUC": 62.396825396825406,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "vowels",
+        "PR-AUC": 56.71287033009214,
+        "ROC-AUC": 97.13584637268849,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "wine",
+        "PR-AUC": 74.37029637029636,
+        "ROC-AUC": 97.64705882352942,
+        "n_seeds": 1
+      },
+      {
+        "dataset": "yeast",
+        "PR-AUC": 37.90212727855068,
+        "ROC-AUC": 53.831416464280025,
+        "n_seeds": 1
+      }
+    ]
+  },
+  "probe12_semi_pr": 69.59534948415835,
+  "complete_57": true,
+  "claim_margins_vs_paper": {
+    "semi_PR": 6.802661433946511,
+    "semi_ROC": 6.213861710183622,
+    "unsup_PR": 13.90684637895528,
+    "unsup_ROC": 10.437226020964786
+  },
+  "claim_margin_floor": 3.0,
+  "stretch_gates_pass": false,
+  "paper_claim_eligible": true,
+  "stretch_miss": true,
+  "all_gates_pass": false
+}

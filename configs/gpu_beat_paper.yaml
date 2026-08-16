@@ -1,0 +1,54 @@
+# Beat-Paper disclosed track (per-dataset embeds). Not Table-1 fair ResNet+BERT.
+# Restored after wipe; keep locks and do not edit gpu_final.yaml.
+
+seed: 111
+seeds: [111, 222, 333, 444, 555]
+run_id: axion_beat_paper
+
+paths:
+  adbench_root: ../../ADBench/adbench/datasets
+  results_dir: results
+  atlas_csv: data/atlas_57_beat_paper.csv
+  embeds_alt_root: data/embeds_alt
+  embeds_alt_whitened_root: data/embeds_alt_whitened
+
+protocol:
+  normalize: zscore
+  unsupervised: full_dataset_train_and_score
+  semi_supervised: train_50pct_normals_only
+  metrics: [PR-AUC, ROC-AUC]
+  embeddings:
+    cv: CV_by_ViT
+    nlp: NLP_by_RoBERTa
+
+integrity:
+  val_fraction: 0.2
+  early_stop_metric: val_loss
+
+harness:
+  model: axion
+  max_train_samples: 50000
+  max_variants: 0
+
+beat_paper:
+  val_fraction: 0.2
+  cv_folder: CV_by_ViT
+  nlp_roberta_folder: NLP_by_RoBERTa
+  nlp_bert_folder: NLP_by_BERT
+  nlp_e5_folder: NLP_by_E5_large/pool=mean
+  axion_config: gpu_beat_paper.yaml
+
+# Minimal AXION block for GPU recipes (local CPU uses --skip-axion).
+axion:
+  epochs: 100
+  batch_size: 512
+  lr: 0.001
+  weight_decay: 1.0e-05
+  patience: 20
+  val_fraction: 0.15
+  latch_alpha: 0.4
+  profile_router: false
+  research_embeds: true
+  ecod: false
+  copod: false
+  goad: false

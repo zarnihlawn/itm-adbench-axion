@@ -1,0 +1,105 @@
+# AXION Phase 5 — protocol + harness defaults (gap-fix polish)
+seed: 111
+seeds: [111, 222, 333, 444, 555]
+
+paths:
+  adbench_root: ../../ADBench/adbench/datasets
+  results_dir: results
+  atlas_csv: data/atlas_57.csv
+
+protocol:
+  # Paper-faithful (AnoDDAE / Livernoche) — DO NOT use ADBench DataGenerator
+  normalize: zscore  # fit on train only
+  unsupervised: full_dataset_train_and_score
+  semi_supervised: train_50pct_normals_only
+  metrics: [PR-AUC, ROC-AUC]
+  embeddings:
+    cv: CV_by_ResNet18
+    nlp: NLP_by_BERT
+
+integrity:
+  val_fraction: 0.2
+  early_stop_metric: val_loss
+  # never select on test PR
+
+harness:
+  model: axion
+  max_train_samples: 50000  # cover/fraud rare-anomaly polish (Phase 5)
+  max_variants: 0  # 0 = all NPZ variants; set 2–3 for fast design loops
+
+axion:
+  epochs: 100
+  batch_size: 256
+  lr: 0.001
+  weight_decay: 0.00001
+  patience: 20
+  val_fraction: 0.15
+  latch_alpha: 0.40
+  latch_alpha_semi: 0.25
+  latch_alpha_semi_tiny: 0.35
+  latch_alpha_semi_huge: 0.20
+  latch_alpha_semi_high_d: 0.45
+  latch_alpha_unsup_huge: 0.70
+  latch_alpha_unsup_large_mid: 0.75
+  latch_alpha_unsup_tiny: 0.75
+  mae_weight: 0.60
+  nll_weight: 0.40
+  mae_weight_semi: 0.90
+  nll_weight_semi: 0.10
+  mae_weight_unsup_huge: 0.85
+  nll_weight_unsup_huge: 0.15
+  semi_epoch_boost: 1.75
+  tiny_epoch_boost: 2.00
+  pca_dim: 128
+  pca_threshold: 400
+  pca_variance: 0.99
+  pca_k_min: 32
+  hedge_alpha: 0.50
+  hedge_alpha_semi_high_d: 0.75
+  hedge_alpha_nlp: 0.35
+  hedge_alpha_semi_nlp: 0.0
+  hedge_alpha_semi_nlp_multi: 0.25
+  robust_latch_unsup_huge: false
+  x_latch_alpha_unsup_huge: 0.90
+  x_latch_max_d: 16
+  contam_trim_frac: 0.025
+  contam_trim_warmup: 12
+  contam_trim_every: 4
+  latch_alpha_unsup_low_d: 0.85
+  nlp_raw_d_min: 700
+  vis_alpha_semi: 0.15
+  disagree_alpha_semi: 0.10
+  hpd_alpha_semi: 0.05
+  c_hedge_alpha_semi: 0.20
+  bank_weight_semi: true
+  calix_semi: true
+  contrastive_weight: 0.05
+  latch_shrinkage: true
+  semi_loss_curriculum: true
+  use_interaction: true
+  interaction_rank: 16
+  ensemble_heads: 2
+  # SPEAR off here (CPU harness bit-identical); enable in configs/gpu.yaml
+  spear: false
+  score_batch_size: 0
+  dataloader_num_workers: 0
+  # Pack/vectorized masks shift MCS RNG vs g5; keep off by default (speed via score_batch + workers)
+  mcs_pack_masks: false
+  vectorized_masks: false
+  # hidden/latent/depth/mask_rates/score_k: null → SCALE auto
+
+probe:
+  datasets:
+    - breastw
+    - cardio
+    - glass
+    - thyroid
+    - satimage-2
+    - cover
+    - fraud
+    - backdoor
+    - CIFAR10
+    - FashionMNIST
+    - Agnews
+    - Imdb
+  seeds: [111, 222, 333]

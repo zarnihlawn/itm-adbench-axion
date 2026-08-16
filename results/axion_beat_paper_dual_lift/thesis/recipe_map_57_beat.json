@@ -1,0 +1,744 @@
+{
+  "ALOI": {
+    "semi-supervised": {
+      "recipe": "shallow_lof",
+      "source": "metrics_sync",
+      "PR-AUC": 18.813414027606928,
+      "ROC-AUC": 77.11368709323122
+    },
+    "unsupervised": {
+      "recipe": "shallow_lof",
+      "source": "metrics_sync",
+      "PR-AUC": 9.392907067325384,
+      "ROC-AUC": 75.67065242401303
+    }
+  },
+  "annthyroid": {
+    "semi-supervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    },
+    "unsupervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    }
+  },
+  "backdoor": {
+    "semi-supervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    },
+    "unsupervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    }
+  },
+  "breastw": {
+    "semi-supervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    },
+    "unsupervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    }
+  },
+  "campaign": {
+    "semi-supervised": {
+      "recipe": "hbos_native",
+      "source": "metrics_sync",
+      "PR-AUC": 54.74788139716278,
+      "ROC-AUC": 80.94004212221624
+    },
+    "unsupervised": {
+      "recipe": "soft_vote_ensemble_native",
+      "source": "metrics_sync",
+      "PR-AUC": 31.45050587526919,
+      "ROC-AUC": 76.3355187368147
+    }
+  },
+  "cardio": {
+    "semi-supervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    },
+    "unsupervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    }
+  },
+  "Cardiotocography": {
+    "semi-supervised": {
+      "recipe": "ocsvm_native",
+      "source": "metrics_sync",
+      "PR-AUC": 76.72301617432223,
+      "ROC-AUC": 83.91222030084586
+    },
+    "unsupervised": {
+      "recipe": "fusion_hbos_iforest_native",
+      "source": "metrics_sync",
+      "PR-AUC": 41.81628774857427,
+      "ROC-AUC": 66.31949508312846
+    }
+  },
+  "celeba": {
+    "semi-supervised": {
+      "recipe": "hbos_native",
+      "source": "metrics_sync",
+      "PR-AUC": 17.98382282836758,
+      "ROC-AUC": 77.1762068107475
+    },
+    "unsupervised": {
+      "recipe": "hbos_native",
+      "source": "metrics_sync",
+      "PR-AUC": 9.758003986188063,
+      "ROC-AUC": 75.81772164644359
+    }
+  },
+  "census": {
+    "semi-supervised": {
+      "recipe": "axion_edge_rare",
+      "source": "metrics_sync",
+      "PR-AUC": 21.79080484309749,
+      "ROC-AUC": 72.47467202178629
+    },
+    "unsupervised": {
+      "recipe": "fusion_ecod_knn_native",
+      "source": "metrics_sync",
+      "PR-AUC": 8.876439823264935,
+      "ROC-AUC": 66.81948238045514
+    }
+  },
+  "cover": {
+    "semi-supervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    },
+    "unsupervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    }
+  },
+  "donors": {
+    "semi-supervised": {
+      "recipe": "axion",
+      "source": "metrics_sync",
+      "PR-AUC": 76.91801564183326,
+      "ROC-AUC": 96.87220433813968
+    },
+    "unsupervised": {
+      "recipe": "rank_ensemble_native",
+      "source": "metrics_sync",
+      "PR-AUC": 27.50497321865868,
+      "ROC-AUC": 91.04444711271118
+    }
+  },
+  "fault": {
+    "semi-supervised": {
+      "recipe": "shallow_knn",
+      "source": "metrics_sync",
+      "PR-AUC": 80.37945309429094,
+      "ROC-AUC": 81.68050210695554
+    },
+    "unsupervised": {
+      "recipe": "fusion_knn_maha_native",
+      "source": "metrics_sync",
+      "PR-AUC": 55.43764196387224,
+      "ROC-AUC": 73.32480629602375
+    }
+  },
+  "fraud": {
+    "semi-supervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    },
+    "unsupervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    }
+  },
+  "glass": {
+    "semi-supervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    },
+    "unsupervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    }
+  },
+  "Hepatitis": {
+    "semi-supervised": {
+      "recipe": "feature_bagging_native",
+      "source": "metrics_sync",
+      "PR-AUC": 68.75718484414135,
+      "ROC-AUC": 83.37104072398189
+    },
+    "unsupervised": {
+      "recipe": "pca_residual_knn_native",
+      "source": "metrics_sync",
+      "PR-AUC": 39.60730126097672,
+      "ROC-AUC": 64.98277841561423
+    }
+  },
+  "http": {
+    "semi-supervised": {
+      "recipe": "rank_ensemble_native",
+      "source": "metrics_sync",
+      "PR-AUC": 95.40573320729074,
+      "ROC-AUC": 99.98284756596833
+    },
+    "unsupervised": {
+      "recipe": "shallow_iforest",
+      "source": "metrics_sync",
+      "PR-AUC": 98.496303089013,
+      "ROC-AUC": 99.99190446566682
+    }
+  },
+  "InternetAds": {
+    "semi-supervised": {
+      "recipe": "icl_lite_native",
+      "source": "metrics_sync",
+      "PR-AUC": 90.6785984524712,
+      "ROC-AUC": 92.79364150840725
+    },
+    "unsupervised": {
+      "recipe": "soft_vote_ensemble_native",
+      "source": "metrics_sync",
+      "PR-AUC": 33.422525715904314,
+      "ROC-AUC": 67.22703651303259
+    }
+  },
+  "Ionosphere": {
+    "semi-supervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    },
+    "unsupervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    }
+  },
+  "landsat": {
+    "semi-supervised": {
+      "recipe": "shallow_lof",
+      "source": "metrics_sync",
+      "PR-AUC": 71.52174897159324,
+      "ROC-AUC": 76.86506593328065
+    },
+    "unsupervised": {
+      "recipe": "elliptical_native",
+      "source": "metrics_sync",
+      "PR-AUC": 25.28277534206388,
+      "ROC-AUC": 60.68992257864544
+    }
+  },
+  "letter": {
+    "semi-supervised": {
+      "recipe": "shallow_lof",
+      "source": "metrics_sync",
+      "PR-AUC": 70.72793379075709,
+      "ROC-AUC": 90.95733333333334
+    },
+    "unsupervised": {
+      "recipe": "shallow_lof",
+      "source": "metrics_sync",
+      "PR-AUC": 47.58994936756193,
+      "ROC-AUC": 89.88466666666666
+    }
+  },
+  "Lymphography": {
+    "semi-supervised": {
+      "recipe": "feature_bagging_native",
+      "source": "metrics_sync",
+      "PR-AUC": 88.57142857142857,
+      "ROC-AUC": 98.59154929577466
+    },
+    "unsupervised": {
+      "recipe": "fusion_hbos_iforest_native",
+      "source": "metrics_sync",
+      "PR-AUC": 95.83333333333334,
+      "ROC-AUC": 99.76525821596245
+    }
+  },
+  "magic.gamma": {
+    "semi-supervised": {
+      "recipe": "axion_edge_rare",
+      "source": "metrics_sync",
+      "PR-AUC": 87.3200647371728,
+      "ROC-AUC": 84.3674802746036
+    },
+    "unsupervised": {
+      "recipe": "avg_knn_native",
+      "source": "metrics_sync",
+      "PR-AUC": 73.41706198775002,
+      "ROC-AUC": 80.55387130304013
+    }
+  },
+  "mammography": {
+    "semi-supervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    },
+    "unsupervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    }
+  },
+  "mnist": {
+    "semi-supervised": {
+      "recipe": "shallow_knn",
+      "source": "metrics_sync",
+      "PR-AUC": 74.16573024004232,
+      "ROC-AUC": 93.7963913259394
+    },
+    "unsupervised": {
+      "recipe": "elliptical_native",
+      "source": "metrics_sync",
+      "PR-AUC": 47.632387789388936,
+      "ROC-AUC": 89.94238529831749
+    }
+  },
+  "musk": {
+    "semi-supervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    },
+    "unsupervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    }
+  },
+  "optdigits": {
+    "semi-supervised": {
+      "recipe": "knn_cosine_native",
+      "source": "metrics_sync",
+      "PR-AUC": 78.19761299605969,
+      "ROC-AUC": 99.22752993814976
+    },
+    "unsupervised": {
+      "recipe": "hbos_native",
+      "source": "metrics_sync",
+      "PR-AUC": 8.447689120428093,
+      "ROC-AUC": 80.4904592709567
+    }
+  },
+  "PageBlocks": {
+    "semi-supervised": {
+      "recipe": "rank_ensemble_native",
+      "source": "metrics_sync",
+      "PR-AUC": 89.15624092308657,
+      "ROC-AUC": 97.39983298806827
+    },
+    "unsupervised": {
+      "recipe": "mcd_native",
+      "source": "metrics_sync",
+      "PR-AUC": 63.29389527017787,
+      "ROC-AUC": 93.79592262872791
+    }
+  },
+  "pendigits": {
+    "semi-supervised": {
+      "recipe": "shallow_knn",
+      "source": "metrics_sync",
+      "PR-AUC": 96.32982887704942,
+      "ROC-AUC": 99.92400113043544
+    },
+    "unsupervised": {
+      "recipe": "cblof_lite_native",
+      "source": "metrics_sync",
+      "PR-AUC": 37.49035815284737,
+      "ROC-AUC": 97.87289093589362
+    }
+  },
+  "Pima": {
+    "semi-supervised": {
+      "recipe": "kde_native",
+      "source": "metrics_sync",
+      "PR-AUC": 73.12762216548207,
+      "ROC-AUC": 75.85970149253731
+    },
+    "unsupervised": {
+      "recipe": "cblof_lite_native",
+      "source": "metrics_sync",
+      "PR-AUC": 53.532190600750276,
+      "ROC-AUC": 71.53358208955224
+    }
+  },
+  "satellite": {
+    "semi-supervised": {
+      "recipe": "shallow_knn",
+      "source": "metrics_sync",
+      "PR-AUC": 89.35480670535915,
+      "ROC-AUC": 87.7517413823897
+    },
+    "unsupervised": {
+      "recipe": "hbos_native",
+      "source": "metrics_sync",
+      "PR-AUC": 67.09940146189427,
+      "ROC-AUC": 75.14247969376858
+    }
+  },
+  "satimage-2": {
+    "semi-supervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    },
+    "unsupervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    }
+  },
+  "shuttle": {
+    "semi-supervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    },
+    "unsupervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    }
+  },
+  "skin": {
+    "semi-supervised": {
+      "recipe": "axion",
+      "source": "metrics_sync",
+      "PR-AUC": 66.3714429540278,
+      "ROC-AUC": 89.32304452973136
+    },
+    "unsupervised": {
+      "recipe": "fusion_ecod_knn_native",
+      "source": "metrics_sync",
+      "PR-AUC": 30.057243945272432,
+      "ROC-AUC": 73.72525434107138
+    }
+  },
+  "smtp": {
+    "semi-supervised": {
+      "recipe": "gmm_pca64",
+      "source": "metrics_sync",
+      "PR-AUC": 66.94139659289569,
+      "ROC-AUC": 87.56596514097093
+    },
+    "unsupervised": {
+      "recipe": "rank_ensemble_native",
+      "source": "metrics_sync",
+      "PR-AUC": 65.18719693212583,
+      "ROC-AUC": 88.66738150803496
+    }
+  },
+  "SpamBase": {
+    "semi-supervised": {
+      "recipe": "rank_ensemble_native",
+      "source": "metrics_sync",
+      "PR-AUC": 89.45143467470331,
+      "ROC-AUC": 84.30245926975822
+    },
+    "unsupervised": {
+      "recipe": "feature_bagging_native",
+      "source": "metrics_sync",
+      "PR-AUC": 49.96823139165014,
+      "ROC-AUC": 65.05501692538506
+    }
+  },
+  "speech": {
+    "semi-supervised": {
+      "recipe": "lscp_lite_native",
+      "source": "metrics_sync",
+      "PR-AUC": 11.308220180889988,
+      "ROC-AUC": 80.77093486929554
+    },
+    "unsupervised": {
+      "recipe": "lscp_lite_native",
+      "source": "metrics_sync",
+      "PR-AUC": 17.950520819427435,
+      "ROC-AUC": 75.12492933860938
+    }
+  },
+  "Stamps": {
+    "semi-supervised": {
+      "recipe": "kde_native",
+      "source": "metrics_sync",
+      "PR-AUC": 66.30539432214412,
+      "ROC-AUC": 95.52549427679502
+    },
+    "unsupervised": {
+      "recipe": "cblof_lite_native",
+      "source": "metrics_sync",
+      "PR-AUC": 38.6637652066294,
+      "ROC-AUC": 92.3374047395344
+    }
+  },
+  "thyroid": {
+    "semi-supervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    },
+    "unsupervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    }
+  },
+  "vertebral": {
+    "semi-supervised": {
+      "recipe": "copod_native",
+      "source": "metrics_sync",
+      "PR-AUC": 34.88900183108396,
+      "ROC-AUC": 67.26984126984128
+    },
+    "unsupervised": {
+      "recipe": "abod_lite_native",
+      "source": "metrics_sync",
+      "PR-AUC": 22.88099659656751,
+      "ROC-AUC": 62.396825396825406
+    }
+  },
+  "vowels": {
+    "semi-supervised": {
+      "recipe": "shallow_knn",
+      "source": "metrics_sync",
+      "PR-AUC": 82.90460953604702,
+      "ROC-AUC": 98.23613086770982
+    },
+    "unsupervised": {
+      "recipe": "fusion_knn_maha_native",
+      "source": "metrics_sync",
+      "PR-AUC": 56.71287033009214,
+      "ROC-AUC": 97.13584637268849
+    }
+  },
+  "Waveform": {
+    "semi-supervised": {
+      "recipe": "gmm_native",
+      "source": "metrics_sync",
+      "PR-AUC": 40.94374131850046,
+      "ROC-AUC": 78.84449760765551
+    },
+    "unsupervised": {
+      "recipe": "sod_lite_native",
+      "source": "metrics_sync",
+      "PR-AUC": 13.95874154425252,
+      "ROC-AUC": 79.12084953634461
+    }
+  },
+  "WBC": {
+    "semi-supervised": {
+      "recipe": "shallow_iforest",
+      "source": "metrics_sync",
+      "PR-AUC": 94.33119658119658,
+      "ROC-AUC": 99.4392523364486
+    },
+    "unsupervised": {
+      "recipe": "axion_edge_rare",
+      "source": "metrics_sync",
+      "PR-AUC": 58.26369902027797,
+      "ROC-AUC": 98.12206572769954
+    }
+  },
+  "WDBC": {
+    "semi-supervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    },
+    "unsupervised": {
+      "recipe": "axion_edge_rare",
+      "source": "lock_force_dual_lift"
+    }
+  },
+  "Wilt": {
+    "semi-supervised": {
+      "recipe": "goad_native",
+      "source": "metrics_sync",
+      "PR-AUC": 83.60600528007268,
+      "ROC-AUC": 96.90694742731787
+    },
+    "unsupervised": {
+      "recipe": "knn_cosine_native",
+      "source": "metrics_sync",
+      "PR-AUC": 35.08624785162044,
+      "ROC-AUC": 77.9186717546574
+    }
+  },
+  "wine": {
+    "semi-supervised": {
+      "recipe": "mahalanobis_native",
+      "source": "metrics_sync",
+      "PR-AUC": 87.74281274281273,
+      "ROC-AUC": 97.83333333333333
+    },
+    "unsupervised": {
+      "recipe": "elliptical_native",
+      "source": "metrics_sync",
+      "PR-AUC": 74.37029637029636,
+      "ROC-AUC": 97.64705882352942
+    }
+  },
+  "WPBC": {
+    "semi-supervised": {
+      "recipe": "knn_cosine_native",
+      "source": "metrics_sync",
+      "PR-AUC": 45.82030459679782,
+      "ROC-AUC": 54.339305711086226
+    },
+    "unsupervised": {
+      "recipe": "fusion_knn_maha_native",
+      "source": "metrics_sync",
+      "PR-AUC": 24.378606502831946,
+      "ROC-AUC": 50.75383965055658
+    }
+  },
+  "yeast": {
+    "semi-supervised": {
+      "recipe": "copod_native",
+      "source": "metrics_sync",
+      "PR-AUC": 56.72090434940622,
+      "ROC-AUC": 56.72769367908585
+    },
+    "unsupervised": {
+      "recipe": "knn_cosine_native",
+      "source": "metrics_sync",
+      "PR-AUC": 37.90212727855068,
+      "ROC-AUC": 53.831416464280025
+    }
+  },
+  "CIFAR10": {
+    "semi-supervised": {
+      "recipe": "shallow_knn_vit",
+      "source": "metrics_sync",
+      "PR-AUC": 91.09991002701128,
+      "ROC-AUC": 98.18334600760457
+    },
+    "unsupervised": {
+      "recipe": "gmm_pca64_vit",
+      "source": "metrics_sync",
+      "PR-AUC": 89.3976655088419,
+      "ROC-AUC": 99.23777946768061
+    }
+  },
+  "FashionMNIST": {
+    "semi-supervised": {
+      "recipe": "gmm_pca64_vit",
+      "source": "metrics_sync",
+      "PR-AUC": 91.27424657868974,
+      "ROC-AUC": 98.42881481481481
+    },
+    "unsupervised": {
+      "recipe": "gmm_pca64_vit",
+      "source": "metrics_sync",
+      "PR-AUC": 88.9679649623395,
+      "ROC-AUC": 98.61071957671957
+    }
+  },
+  "MNIST-C": {
+    "semi-supervised": {
+      "recipe": "gmm_pca64_vit",
+      "source": "metrics_sync",
+      "PR-AUC": 73.93386401845152,
+      "ROC-AUC": 94.23463421052631
+    },
+    "unsupervised": {
+      "recipe": "gmm_pca64_vit",
+      "source": "metrics_sync",
+      "PR-AUC": 65.30656976608266,
+      "ROC-AUC": 95.57923881578947
+    }
+  },
+  "MVTec-AD": {
+    "semi-supervised": {
+      "recipe": "shallow_lof_vit",
+      "source": "metrics_sync",
+      "PR-AUC": 97.17230428628926,
+      "ROC-AUC": 98.41460732607742
+    },
+    "unsupervised": {
+      "recipe": "shallow_knn_vit",
+      "source": "metrics_sync",
+      "PR-AUC": 94.56953599978851,
+      "ROC-AUC": 98.05651634916555
+    }
+  },
+  "SVHN": {
+    "semi-supervised": {
+      "recipe": "gmm_pca64_vit",
+      "source": "metrics_sync",
+      "PR-AUC": 35.38320426422877,
+      "ROC-AUC": 84.2126189896367
+    },
+    "unsupervised": {
+      "recipe": "sod_lite_vit",
+      "source": "metrics_sync",
+      "PR-AUC": 21.022858668743016,
+      "ROC-AUC": 82.7461445451625
+    }
+  },
+  "Agnews": {
+    "semi-supervised": {
+      "recipe": "axion_roberta_spear_platt",
+      "source": "metrics_sync",
+      "PR-AUC": 57.83905152711625,
+      "ROC-AUC": 88.99995789473684
+    },
+    "unsupervised": {
+      "recipe": "knn_cosine_roberta",
+      "source": "metrics_sync",
+      "PR-AUC": 26.229517386043355,
+      "ROC-AUC": 85.77940263157895
+    }
+  },
+  "Amazon": {
+    "semi-supervised": {
+      "recipe": "sod_lite_e5",
+      "source": "metrics_sync",
+      "PR-AUC": 35.675285527223025,
+      "ROC-AUC": 89.42922105263158
+    },
+    "unsupervised": {
+      "recipe": "gmm_pca64_e5",
+      "source": "metrics_sync",
+      "PR-AUC": 22.158018790069985,
+      "ROC-AUC": 90.28633684210526
+    }
+  },
+  "Imdb": {
+    "semi-supervised": {
+      "recipe": "gmm_pca64_e5",
+      "source": "metrics_sync",
+      "PR-AUC": 31.04962300355284,
+      "ROC-AUC": 87.63734736842106
+    },
+    "unsupervised": {
+      "recipe": "gmm_pca64_e5",
+      "source": "metrics_sync",
+      "PR-AUC": 19.15480959598442,
+      "ROC-AUC": 89.09662105263156
+    }
+  },
+  "Yelp": {
+    "semi-supervised": {
+      "recipe": "sod_lite_e5",
+      "source": "metrics_sync",
+      "PR-AUC": 33.7203424343579,
+      "ROC-AUC": 87.90311578947369
+    },
+    "unsupervised": {
+      "recipe": "gmm_pca64_e5",
+      "source": "metrics_sync",
+      "PR-AUC": 21.666125969094303,
+      "ROC-AUC": 89.24397894736842
+    }
+  },
+  "20newsgroups": {
+    "semi-supervised": {
+      "recipe": "gmm_pca64_e5",
+      "source": "metrics_sync",
+      "PR-AUC": 36.55239995117796,
+      "ROC-AUC": 89.34689333940368
+    },
+    "unsupervised": {
+      "recipe": "gmm_pca64_e5",
+      "source": "metrics_sync",
+      "PR-AUC": 21.535917915492476,
+      "ROC-AUC": 89.10454840611361
+    }
+  }
+}

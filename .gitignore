@@ -1,0 +1,33 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.egg-info/
+.mypy_cache/
+.DS_Store
+
+# Never commit local data / embeds / caches
+data/
+*.npz
+*.pt
+*.pth
+*.bin
+*.h5
+*.parquet
+
+# Ignore bulk result dumps; keep dual_lift claim files
+results/**/*.json
+results/**/*.csv
+results/**/*.jsonl
+!results/axion_beat_paper_dual_lift/STATUS.md
+!results/axion_beat_paper_dual_lift/compare_to_ddae.json
+!results/axion_beat_paper_dual_lift/dual_lift_report.json
+!results/axion_beat_paper_dual_lift/thesis/
+!results/axion_beat_paper_dual_lift/thesis/**
+!results/axion_beat_paper/STATUS.md
+!results/axion_beat_paper/thesis/
+!results/axion_beat_paper/thesis/**
+
+# Allow Beat-Paper bytecode bak (run/select loaders)
+*.pyc
+!scripts/_bytecode_bak/
+!scripts/_bytecode_bak/**

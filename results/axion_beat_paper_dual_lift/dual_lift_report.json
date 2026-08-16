@@ -1,0 +1,76 @@
+{
+  "settings": {
+    "semi-supervised": {
+      "PR-AUC": 68.16266143394651,
+      "ROC-AUC": 89.38386171018362,
+      "n_datasets": 57,
+      "vs_paper": {
+        "dPR": 6.802661433946511,
+        "dROC": 6.213861710183622
+      },
+      "vs_semi_heavy": {
+        "dPR": NaN,
+        "dROC": NaN,
+        "heavy_PR": null,
+        "heavy_ROC": null
+      },
+      "vs_last_local": {
+        "dPR": NaN,
+        "dROC": NaN,
+        "local_PR": null,
+        "local_ROC": null,
+        "local_n": null
+      },
+      "claim_ok": true,
+      "stretch": {
+        "PR_target": 68.0,
+        "ROC_target": 88.0,
+        "PR_pass": true,
+        "ROC_pass": true
+      }
+    },
+    "unsupervised": {
+      "PR-AUC": 46.67684637895528,
+      "ROC-AUC": 84.51722602096478,
+      "n_datasets": 57,
+      "vs_paper": {
+        "dPR": 13.90684637895528,
+        "dROC": 10.437226020964786
+      },
+      "vs_semi_heavy": {
+        "dPR": NaN,
+        "dROC": NaN,
+        "heavy_PR": null,
+        "heavy_ROC": null
+      },
+      "vs_last_local": {
+        "dPR": NaN,
+        "dROC": NaN,
+        "local_PR": null,
+        "local_ROC": null,
+        "local_n": null
+      },
+      "claim_ok": true,
+      "stretch": {
+        "PR_target": 45.0,
+        "ROC_target": 88.0,
+        "PR_pass": true,
+        "ROC_pass": false
+      }
+    }
+  },
+  "gates": {
+    "G_bp_semi_pr": true,
+    "G_bp_semi_roc": true,
+    "G_bp_unsup_pr": true,
+    "G_bp_unsup_roc": false,
+    "G_bp_12probe": true,
+    "G_bp_integrity": true,
+    "G_bp_claim_margin": true
+  },
+  "complete_57": true,
+  "paper_claim_eligible": true,
+  "claim_margin_all_four": true,
+  "semi_stretch_pass": true,
+  "stop_ok": true
+}
