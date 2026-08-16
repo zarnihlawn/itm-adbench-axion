@@ -5,14 +5,16 @@ __pycache__/
 .mypy_cache/
 .DS_Store
 
-# Never commit local data / embeds / caches
-data/
+# Never commit embeds / caches (keep small atlas CSVs)
+/data/embeds*/
+/data/**/*.npz
 *.npz
 *.pt
 *.pth
 *.bin
 *.h5
 *.parquet
+!/data/atlas_*.csv
 
 # Ignore bulk result dumps; keep dual_lift claim files
 results/**/*.json
