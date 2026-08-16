@@ -6,7 +6,7 @@ seeds: [111, 222, 333, 444, 555]
 run_id: axion_beat_paper
 
 paths:
-  adbench_root: ../../ADBench/adbench/datasets
+  adbench_root: ../ADBench/adbench/datasets
   results_dir: results
   atlas_csv: data/atlas_57_beat_paper.csv
   embeds_alt_root: data/embeds_alt

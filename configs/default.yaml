@@ -3,7 +3,7 @@ seed: 111
 seeds: [111, 222, 333, 444, 555]
 
 paths:
-  adbench_root: ../../ADBench/adbench/datasets
+  adbench_root: ../ADBench/adbench/datasets
   results_dir: results
   atlas_csv: data/atlas_57.csv
 

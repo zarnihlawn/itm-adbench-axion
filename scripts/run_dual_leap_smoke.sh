@@ -2,7 +2,14 @@
 # Local leap smoke: catalog assert, unit tests, tiny leap probes.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-PY="${PY:-$(pwd)/.venv/bin/python}"
+if [[ -n "${PY:-}" ]]; then
+  :
+elif [[ -x "$(pwd)/.venv/bin/python" ]]; then
+  PY="$(pwd)/.venv/bin/python"
+else
+  PY="$(command -v python3)"
+fi
+export PY
 export OMP_NUM_THREADS="${OMP_NUM_THREADS:-4}"
 export TORCH_NUM_THREADS="${TORCH_NUM_THREADS:-4}"
 RUN_ID="${RUN_ID:-axion_beat_paper_leap_smoke}"

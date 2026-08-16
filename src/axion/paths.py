@@ -1,15 +1,16 @@
-"""Path resolution for AXION (lives at ITM/project/axion)."""
+"""Path resolution for standalone itm-adbench-axion checkout."""
 from __future__ import annotations
 
 from pathlib import Path
 
-# ITM/project/axion/
+# Repo root (itm-adbench-axion/)
 AXION_ROOT = Path(__file__).resolve().parents[2]
-# ITM/project/
-PROJECT_ROOT = AXION_ROOT.parent
-# ITM/
-ITM_ROOT = PROJECT_ROOT.parent
-# ADBench is a sibling of project under ITM/
+# Parent of repo (usually ITM/)
+ITM_ROOT = AXION_ROOT.parent
+# Back-compat alias used by older scripts
+PROJECT_ROOT = AXION_ROOT
+
+# ADBench is a sibling of this repo under ITM/
 DEFAULT_ADBENCH_DATASETS = ITM_ROOT / "ADBench" / "adbench" / "datasets"
 # Official AnoDDAE reference (read-only protocol twin)
 ANODDAE_SRC = ITM_ROOT / "AnoDDAE" / "AnoDDAE" / "src"

@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -21,7 +22,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from beat_paper_catalog import AXION_LOCKED, CLASSICAL_STRONG, GUARDS  # noqa: E402
 
-PY = str(ROOT / ".venv" / "bin" / "python")
+PY = os.environ.get("PY") or os.environ.get("PYTHON") or sys.executable
 DUAL = ROOT / "results" / "axion_beat_paper_dual_lift"
 LEAP_RUN = "axion_beat_paper_leap"
 LEAP_ROOT = ROOT / "results" / LEAP_RUN
