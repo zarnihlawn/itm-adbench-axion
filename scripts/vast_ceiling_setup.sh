@@ -4,6 +4,11 @@
 #   bash scripts/vast_ceiling_setup.sh
 # Optional env:
 #   ADBENCH_ROOT=...   EMBEDS_SRC=...   (fallback link/copy hints)
+#
+# YAML (configs/gpu_beat_paper*.yaml) expects, from repo root:
+#   data/adbench/datasets
+#   data/embeds_alt
+#   data/embeds_alt_whitened
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -45,14 +50,27 @@ fi
 
 # ADBench classical / CV / NLP folders
 if [[ ! -d "$LOCAL_ADBENCH/Classical" ]]; then
-  if [[ -d "$ITM_ROOT/ADBench/adbench/datasets/Classical" ]]; then
-    echo "WARN: vendored ADBench missing; run: bash scripts/vendor_data.sh" >&2
-    ADBENCH_ROOT="$ITM_ROOT/ADBench/adbench/datasets"
-  fi
+  for fallback in \
+    "$ITM_ROOT/ADBench/adbench/datasets" \
+    "$ROOT/ADBench/adbench/datasets"; do
+    if [[ -d "$fallback/Classical" ]]; then
+      echo "WARN: $LOCAL_ADBENCH missing Classical; using $fallback" >&2
+      mkdir -p "$(dirname "$LOCAL_ADBENCH")"
+      if [[ ! -e "$LOCAL_ADBENCH" ]]; then
+        ln -sfn "$fallback" "$LOCAL_ADBENCH"
+        echo "linked $LOCAL_ADBENCH -> $fallback"
+      fi
+      ADBENCH_ROOT="$LOCAL_ADBENCH"
+      if [[ ! -d "$ADBENCH_ROOT/Classical" ]]; then
+        ADBENCH_ROOT="$fallback"
+      fi
+      break
+    fi
+  done
 fi
 if [[ ! -d "$ADBENCH_ROOT/Classical" ]]; then
-  echo "ERROR: ADBench datasets missing at $LOCAL_ADBENCH" >&2
-  echo "Run: bash scripts/vendor_data.sh" >&2
+  echo "ERROR: ADBench datasets missing (expected data/adbench/datasets or ../ADBench/adbench/datasets)" >&2
+  echo "Run: LINK_IN_REPO=1 bash scripts/clone_adbench.sh" >&2
   exit 1
 fi
 
@@ -91,6 +109,10 @@ if torch.cuda.is_available():
 if not ok:
     raise SystemExit("embed pools incomplete")
 print("SETUP_OK")
+print("code:", r"$ROOT")
+print("adbench_root:", cfg["paths"]["adbench_root"])
+print("embeds_alt_root:", cfg["paths"].get("embeds_alt_root"))
+print("embeds_alt_whitened_root:", cfg["paths"].get("embeds_alt_whitened_root"))
 PY
 
 echo "Next: bash scripts/run_seeds.sh"

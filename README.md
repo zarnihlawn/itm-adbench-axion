@@ -38,7 +38,7 @@ Frozen map + historical claim dump: [`results/axion_beat_paper_dual_lift/`](resu
 
 - Python ≥ 3.10
 - NVIDIA GPU with CUDA for AXION ceiling replay (RTX 3090 profile: [`SETUP_RTX3090.md`](SETUP_RTX3090.md))
-- Local data: `bash scripts/vendor_data.sh` (~4.4 GB into `data/`; not committed to git)
+- Local data: official ADBench via `scripts/clone_adbench.sh` plus embeds via `SKIP_ADBENCH=1 bash scripts/vendor_data.sh` (see [`data/README.md`](data/README.md); not committed to git)
 
 ## Setup
 

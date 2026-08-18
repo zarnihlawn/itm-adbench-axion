@@ -6,7 +6,21 @@ from typing import Any, Dict, Optional
 
 import yaml
 
-from axion.paths import AXION_ROOT, DEFAULT_ADBENCH_DATASETS
+from axion.paths import (
+    AXION_ROOT,
+    DEFAULT_ADBENCH_DATASETS,
+    EMBEDS_ALT,
+    EMBEDS_ALT_WHITENED,
+)
+
+
+def _resolve_under_root(raw: str | Path, *, fallback: Optional[Path] = None) -> Path:
+    p = Path(raw)
+    if not p.is_absolute():
+        p = (AXION_ROOT / p).resolve()
+    if fallback is not None and not p.exists():
+        return fallback
+    return p
 
 
 def load_config(path: Optional[str | Path] = None) -> Dict[str, Any]:
@@ -17,13 +31,19 @@ def load_config(path: Optional[str | Path] = None) -> Dict[str, Any]:
         cfg = yaml.safe_load(f) or {}
 
     paths = cfg.setdefault("paths", {})
-    adbench = paths.get("adbench_root", "../../ADBench/adbench/datasets")
-    adbench_path = Path(adbench)
-    if not adbench_path.is_absolute():
-        adbench_path = (AXION_ROOT / adbench_path).resolve()
-    if not adbench_path.exists():
-        adbench_path = DEFAULT_ADBENCH_DATASETS
-    paths["adbench_root"] = str(adbench_path)
+    adbench = paths.get("adbench_root", "data/adbench/datasets")
+    paths["adbench_root"] = str(
+        _resolve_under_root(adbench, fallback=DEFAULT_ADBENCH_DATASETS)
+    )
+    paths["embeds_alt_root"] = str(
+        _resolve_under_root(paths.get("embeds_alt_root", "data/embeds_alt"), fallback=EMBEDS_ALT)
+    )
+    paths["embeds_alt_whitened_root"] = str(
+        _resolve_under_root(
+            paths.get("embeds_alt_whitened_root", "data/embeds_alt_whitened"),
+            fallback=EMBEDS_ALT_WHITENED,
+        )
+    )
 
     results = paths.get("results_dir", "results")
     results_path = Path(results)

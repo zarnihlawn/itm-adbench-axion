@@ -21,6 +21,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from axion.eval.metrics import PAPER_DDAE  # noqa: E402
+from axion.paths import DEFAULT_ADBENCH_DATASETS, EMBEDS_ALT, EMBEDS_ALT_WHITENED  # noqa: E402
 
 RUN_ID = "axion_beat_paper"
 THESIS_DIR = ROOT / "results" / "axion_beat_paper"
@@ -466,9 +467,9 @@ def _pool_has_npz(path: Path) -> bool:
 
 def embed_folders(cfg: Mapping[str, Any]) -> Dict[str, Path]:
     paths = cfg.get("paths", {})
-    adbench = _resolve_cfg_path(paths.get("adbench_root"), default=ROOT.parent.parent / "ADBench" / "adbench" / "datasets")
-    alt = _resolve_cfg_path(paths.get("embeds_alt_root"), default=ROOT / "data" / "embeds_alt")
-    whitened = _resolve_cfg_path(paths.get("embeds_alt_whitened_root"), default=ROOT / "data" / "embeds_alt_whitened")
+    adbench = _resolve_cfg_path(paths.get("adbench_root"), default=DEFAULT_ADBENCH_DATASETS)
+    alt = _resolve_cfg_path(paths.get("embeds_alt_root"), default=EMBEDS_ALT)
+    whitened = _resolve_cfg_path(paths.get("embeds_alt_whitened_root"), default=EMBEDS_ALT_WHITENED)
     beat = cfg.get("beat_paper", {})
     e5_rel = str(beat.get("nlp_e5_folder", "NLP_by_E5_large/pool=mean"))
     cv_rel = str(beat.get("cv_folder", "CV_by_ViT"))

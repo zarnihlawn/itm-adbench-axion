@@ -7,6 +7,9 @@ seeds: [111, 222, 333, 444, 555]
 run_id: axion_beat_paper_dual_lift_gpu
 
 paths:
+  # Relative to itm-adbench-axion/ (repo root). Official NPZs at (a) or (b):
+  #   (a) ../ADBench/adbench/datasets   (symlink this path onto (b))
+  #   (b) data/adbench/datasets
   adbench_root: data/adbench/datasets
   results_dir: results
   atlas_csv: data/atlas_57_beat_paper.csv

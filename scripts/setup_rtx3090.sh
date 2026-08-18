@@ -22,7 +22,14 @@ if command -v nvidia-smi >/dev/null 2>&1; then
 fi
 pip install -r requirements.txt
 
-bash scripts/vendor_data.sh
+# Fair eval: official ADBench clone + embeds only (not laptop rsync).
+# Set VENDOR_ADBENCH=1 to rsync from ../ADBench instead.
+if [[ "${VENDOR_ADBENCH:-0}" == "1" ]]; then
+  bash scripts/vendor_data.sh
+else
+  LINK_IN_REPO=1 bash scripts/clone_adbench.sh
+  SKIP_ADBENCH=1 bash scripts/vendor_data.sh
+fi
 
 export PYTHONPATH=src:scripts
 export CFG=configs/gpu_beat_paper_3090.yaml
@@ -40,5 +47,8 @@ PY
 
 echo ""
 echo "SETUP_RTX3090_OK"
+echo "code: $ROOT"
+echo "datasets: $ROOT/data/adbench/datasets  (or ../ADBench/adbench/datasets)"
+echo "embeds: $ROOT/data/embeds_alt  and  $ROOT/data/embeds_alt_whitened"
 echo "Launch full run: bash scripts/run_seeds.sh"
 echo "Monitor: watch -n2 nvidia-smi"
