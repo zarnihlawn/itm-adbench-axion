@@ -10,8 +10,12 @@ ITM_ROOT = AXION_ROOT.parent
 # Back-compat alias used by older scripts
 PROJECT_ROOT = AXION_ROOT
 
-# ADBench is a sibling of this repo under ITM/
-DEFAULT_ADBENCH_DATASETS = ITM_ROOT / "ADBench" / "adbench" / "datasets"
+# In-repo vendor path first; sibling ITM/ADBench fallback for dev checkouts
+_LOCAL_ADBENCH = AXION_ROOT / "data" / "adbench" / "datasets"
+_SIBLING_ADBENCH = ITM_ROOT / "ADBench" / "adbench" / "datasets"
+DEFAULT_ADBENCH_DATASETS = (
+    _LOCAL_ADBENCH if _LOCAL_ADBENCH.is_dir() else _SIBLING_ADBENCH
+)
 # Official AnoDDAE reference (read-only protocol twin)
 ANODDAE_SRC = ITM_ROOT / "AnoDDAE" / "AnoDDAE" / "src"
 

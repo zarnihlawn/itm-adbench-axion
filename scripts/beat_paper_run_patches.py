@@ -1,8 +1,58 @@
 """Post-load patches for beat_paper_run (run_id / map ROOT fixes)."""
 from __future__ import annotations
 
+import json
 from pathlib import Path
-from typing import Any
+from typing import Any, Dict, Optional
+
+
+_CLAIM_METRICS = (
+    Path(__file__).resolve().parents[1]
+    / "results"
+    / "axion_beat_paper_dual_lift"
+    / "metrics"
+)
+
+
+def _claim_hparams(dataset: str, setting: str, seed: int = 111) -> Dict[str, Any]:
+    """Pull k / n_components from frozen dual_lift claim metrics when present."""
+    p = _CLAIM_METRICS / f"{dataset}__{setting}__{seed}__beat_paper.json"
+    if not p.exists():
+        return {}
+    try:
+        extra = json.loads(p.read_text(encoding="utf-8")).get("extra") or {}
+    except Exception:
+        return {}
+    out: Dict[str, Any] = {}
+    for key in ("n_components", "k", "n_neighbors"):
+        if extra.get(key) is not None:
+            out[key] = extra[key]
+    return out
+
+
+def _enrich_recipe_entry(
+    entry: Dict[str, Any],
+    *,
+    dataset: str,
+    setting: str,
+    seed: int,
+) -> Dict[str, Any]:
+    """Merge claim extras + catalog RecipeSpec defaults into a map recipe dict."""
+    from beat_paper_catalog import RECIPES
+
+    out = dict(entry or {})
+    recipe_id = str(out.get("recipe") or "")
+    claim = _claim_hparams(dataset, setting, seed=seed)
+    for key, val in claim.items():
+        if out.get(key) is None:
+            out[key] = val
+    rec = RECIPES.get(recipe_id)
+    if rec is not None:
+        if out.get("n_components") is None and getattr(rec, "n_components", None) is not None:
+            out["n_components"] = int(rec.n_components)
+        if out.get("pca_dim") is None and getattr(rec, "pca_dim", None) is not None:
+            out["pca_dim"] = int(rec.pca_dim)
+    return out
 
 
 def apply_run_patches(mod: Any) -> None:
@@ -10,6 +60,7 @@ def apply_run_patches(mod: Any) -> None:
         return
 
     _orig_main = mod.main
+    _orig_run_map = getattr(mod, "run_map", None)
     ROOT = mod.ROOT
 
     def main() -> None:
@@ -107,7 +158,50 @@ def apply_run_patches(mod: Any) -> None:
             return m
         return json.loads(path.read_text(encoding="utf-8"))
 
+    def run_map(
+        cfg,
+        *,
+        datasets,
+        seeds,
+        settings,
+        map_path,
+        metrics_dir,
+        skip_axion=False,
+    ):
+        """Enrich frozen map entries with claim/catalog GMM hparams, then score."""
+        import copy
+
+        raw = _load_map(Path(map_path))
+        enriched = copy.deepcopy(raw)
+        seed0 = int(seeds[0]) if seeds else 111
+        for ds, by_setting in enriched.items():
+            if not isinstance(by_setting, dict):
+                continue
+            for setting, entry in list(by_setting.items()):
+                if not isinstance(entry, dict):
+                    continue
+                by_setting[setting] = _enrich_recipe_entry(
+                    entry, dataset=str(ds), setting=str(setting), seed=seed0
+                )
+        # Write a sidecar so audits see the exact hparams used for this rescore.
+        metrics_dir = Path(metrics_dir)
+        thesis = metrics_dir.parent / "thesis"
+        thesis.mkdir(parents=True, exist_ok=True)
+        side = thesis / "recipe_map_enriched_hparams.json"
+        side.write_text(json.dumps(enriched, indent=2), encoding="utf-8")
+        return _orig_run_map(
+            cfg,
+            datasets=datasets,
+            seeds=seeds,
+            settings=settings,
+            map_path=side,
+            metrics_dir=metrics_dir,
+            skip_axion=skip_axion,
+        )
+
     mod._parse_seeds = _parse_seeds
     mod._load_map = _load_map
     mod.main = main
+    if callable(_orig_run_map):
+        mod.run_map = run_map
     mod.__semi_heavy_run_patched__ = True

@@ -126,8 +126,34 @@ rsync -avz -e "ssh -p PORT" \
   /home/zarnihlawn/Desktop/ITM/project/axion/results/
 ```
 
+## Dual-lift ceiling rescore (all seeds, frozen map)
+
+Slim repo layout: `ITM/itm-adbench-axion` (or sync this tree onto the instance).
+
+```bash
+# On GPU host (RTX A4000 16GB class)
+cd /data/ITM/itm-adbench-axion   # or clone + rsync data
+# Whitened embeds + ADBench must be present (see scripts/vast_ceiling_setup.sh)
+export PY=python3
+bash scripts/vast_ceiling_setup.sh
+# Resume-safe: copies seed-111 live metrics, then scores 222-555
+bash scripts/run_seeds.sh
+```
+
+Requirements:
+
+- Frozen map only: `results/axion_beat_paper_dual_lift/thesis/recipe_map_57_beat.json`
+- Full configs: `configs/gpu_beat_paper.yaml` + `configs/gpu_final.yaml` (locks)
+- Do **not** pass `--skip-axion`
+- Do **not** use `configs/local_seed111.yaml`
+- Whitened pools: `data/embeds_alt_whitened/{CV_by_ViT,NLP_by_E5_large/pool=mean}`
+
+Success macros (n=57, seed-111): semi **68.16 / 89.38**, unsup **46.68 / 84.52**.
+Five-seed mean is extra robustness, not a new recipe map.
+
 ## Local note
 
 - Do not mix with archived DDAE-PAR under `ITM/archive/` or old AdaDDAE `results/adadae_*`
 - ADBench path resolves to `ITM/ADBench/...` automatically from `project/axion`
 - Gap-fix / dual-track: `results/axion_g5/g5_diagnosis.md`
+- Laptop ceiling prep: fix `data/embeds_alt*` symlinks to `../../project/axion/data/...` (not `../project/...`)

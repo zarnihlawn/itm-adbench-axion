@@ -1,0 +1,5 @@
+Wrote /home/zarnihlawn/Desktop/ITM/itm-adbench-axion/results/axion_beat_paper_dual_lift_local111/compare_to_ddae.json
+MACRO semi-supervised: PR=63.28 ROC=85.75 n=57
+MACRO unsupervised: PR=41.47 ROC=80.56 n=57
+GATES: {'G_bp_semi_pr': False, 'G_bp_semi_roc': False, 'G_bp_unsup_pr': False, 'G_bp_unsup_roc': False, 'G_bp_12probe': False, 'G_bp_integrity': True, 'G_bp_claim_margin': False}
+GATE seed-111: need complete_57 and >=+3.0 on all four paper deltas (GPU run required)

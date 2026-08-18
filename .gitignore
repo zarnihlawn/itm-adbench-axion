@@ -6,6 +6,7 @@ __pycache__/
 .DS_Store
 
 # Never commit embeds / caches (keep small atlas CSVs)
+/data/adbench/
 /data/embeds*/
 /data/**/*.npz
 *.npz

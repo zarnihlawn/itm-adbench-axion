@@ -1,5 +1,6 @@
-# Beat-Paper disclosed track (per-dataset embeds). Not Table-1 fair ResNet+BERT.
-# Restored after wipe; keep locks and do not edit gpu_final.yaml.
+# Beat-Paper dual_lift ceiling on RTX 3090 (24 GB VRAM / 16 CPU / 64 GiB RAM).
+# Recipe fields match gpu_beat_paper.yaml; throughput only differs.
+# Launch: CFG=configs/gpu_beat_paper_3090.yaml bash scripts/run_seeds.sh
 
 seed: 111
 seeds: [111, 222, 333, 444, 555]
@@ -36,9 +37,8 @@ beat_paper:
   nlp_roberta_folder: NLP_by_RoBERTa
   nlp_bert_folder: NLP_by_BERT
   nlp_e5_folder: NLP_by_E5_large/pool=mean
-  axion_config: gpu_beat_paper.yaml
+  axion_config: gpu_beat_paper_3090.yaml
 
-# AXION block for GPU recipes. Ceiling replay never uses --skip-axion.
 axion:
   epochs: 100
   batch_size: 512
@@ -52,3 +52,22 @@ axion:
   ecod: false
   copod: false
   goad: false
+
+  # Throughput: RTX 3090 24 GB / i5-13400 16 threads / 64 GiB RAM
+  # Recipe-safe clamps (tiny/mid/huge) unchanged from gpu_final ship path.
+  score_batch_size: 32768
+  score_batch_size_oom_fallback: 2048
+  dataloader_num_workers: 4
+  tiny_n_safe_hw: true
+  tiny_n_safe_threshold: 250
+  tiny_n_score_batch_size: 512
+  tiny_n_dataloader_num_workers: 0
+  mid_n_safe_hw: true
+  mid_n_score_batch_size: 512
+  mid_n_dataloader_num_workers: 0
+  huge_n_safe_hw: true
+  huge_n_safe_threshold: 10000
+  huge_n_score_batch_size: 512
+  huge_n_dataloader_num_workers: 0
+  mcs_pack_masks: false
+  vectorized_masks: false

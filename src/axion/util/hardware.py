@@ -157,8 +157,9 @@ def recommend_dataloader_workers(override: int = -1) -> int:
     if int(override) >= 0:
         return int(override)
     n = cpu_count()
-    # Cap at 8: host RAM on rented 16GB-GPU boxes is often ~21 GiB
-    return int(min(8, max(0, n // 3)))
+    # Cap: 8 on small boxes; up to 12 when many cores + ample RAM (64 GiB class)
+    cap = 12 if n >= 16 else 8
+    return int(min(cap, max(0, n // 3)))
 
 
 def build_profile(

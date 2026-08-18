@@ -1,12 +1,13 @@
-# Beat-Paper disclosed track (per-dataset embeds). Not Table-1 fair ResNet+BERT.
-# Restored after wipe; keep locks and do not edit gpu_final.yaml.
+# NOT the claim path. Throttled CPU debug only (20k cap, short patience).
+# Main seed-111: bash scripts/run_seed111.sh (configs/gpu_beat_paper.yaml).
+# Machine target: ~16 threads / ~16GB RAM, no NVIDIA driver in PATH.
 
 seed: 111
-seeds: [111, 222, 333, 444, 555]
-run_id: axion_beat_paper_dual_lift_gpu
+seeds: [111]
+run_id: axion_beat_paper_dual_lift_local111
 
 paths:
-  adbench_root: data/adbench/datasets
+  adbench_root: ../ADBench/adbench/datasets
   results_dir: results
   atlas_csv: data/atlas_57_beat_paper.csv
   embeds_alt_root: data/embeds_alt
@@ -27,7 +28,8 @@ integrity:
 
 harness:
   model: axion
-  max_train_samples: 50000
+  # Cap train rows to keep peak RSS down on 16GB hosts (cover/fraud/census).
+  max_train_samples: 20000
   max_variants: 0
 
 beat_paper:
@@ -36,15 +38,14 @@ beat_paper:
   nlp_roberta_folder: NLP_by_RoBERTa
   nlp_bert_folder: NLP_by_BERT
   nlp_e5_folder: NLP_by_E5_large/pool=mean
-  axion_config: gpu_beat_paper.yaml
+  axion_config: local_seed111.yaml
 
-# AXION block for GPU recipes. Ceiling replay never uses --skip-axion.
 axion:
-  epochs: 100
-  batch_size: 512
+  epochs: 80
+  batch_size: 128
   lr: 0.001
   weight_decay: 1.0e-05
-  patience: 20
+  patience: 12
   val_fraction: 0.15
   latch_alpha: 0.4
   profile_router: false
@@ -52,3 +53,6 @@ axion:
   ecod: false
   copod: false
   goad: false
+  # Prefer fewer loader processes on laptop RAM.
+  dataloader_num_workers: 0
+  score_batch_size: 1024

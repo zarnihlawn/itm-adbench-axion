@@ -1,0 +1,251 @@
+# AXION ULTIMATE FINAL — frozen Table-1 fair ship (edge_rare recipe)
+#
+# Protocol: 57 datasets × 2 settings × 5 seeds = 570 jobs (paper-faithful).
+# Recipe lock: edge_rare (semi ~55.45 / unsup ~36.73 on 12-probe seed-111).
+# Do NOT enable gap-close experiments (cv_knn / nlp_lof / spear_allow / nest / goad).
+#
+# Launch (Vast): bash scripts/run_final.sh all
+# Assert only:   python scripts/assert_final_config.py --config configs/gpu_final.yaml
+#
+# Hardware target: RTX A4000 16GB / ~8 logical CPUs / ~64 GiB
+# (Vast instance 47448156 / host 458442 / 202.122.49.242).
+# OMP auto via run_final.sh (~nproc-2). Recipe hypers frozen; throughput only below.
+
+seed: 111
+seeds: [111, 222, 333, 444, 555]
+
+paths:
+  adbench_root: ../ADBench/adbench/datasets
+  results_dir: results
+  atlas_csv: data/atlas_57.csv
+
+protocol:
+  normalize: zscore
+  unsupervised: full_dataset_train_and_score
+  semi_supervised: train_50pct_normals_only
+  metrics: [PR-AUC, ROC-AUC]
+  embeddings:
+    cv: CV_by_ResNet18
+    nlp: NLP_by_BERT
+
+integrity:
+  val_fraction: 0.2
+  early_stop_metric: val_loss
+
+harness:
+  model: axion
+  max_train_samples: 50000
+  max_variants: 0
+
+axion:
+  epochs: 100
+  batch_size: 512
+  lr: 0.001
+  weight_decay: 0.00001
+  patience: 20
+  val_fraction: 0.15
+
+  # MCS / latch (g5 + edge_rare)
+  latch_alpha: 0.40
+  latch_alpha_semi: 0.0
+  latch_alpha_semi_tiny: 0.0
+  latch_alpha_semi_huge: 0.0
+  latch_alpha_semi_huge_mid: 0.0
+  latch_alpha_semi_high_d: 0.35
+  latch_alpha_unsup_huge: 0.70
+  latch_alpha_unsup_large_mid: 0.75
+  latch_alpha_unsup_tiny: 0.75
+  mae_weight: 0.60
+  nll_weight: 0.40
+  mae_weight_semi: 0.80
+  nll_weight_semi: 0.20
+  mae_weight_unsup_huge: 0.85
+  nll_weight_unsup_huge: 0.15
+  semi_epoch_boost: 1.25
+  tiny_epoch_boost: 2.00
+  pca_dim: 128
+  pca_threshold: 400
+  pca_variance: 0.99
+  pca_k_min: 32
+  hedge_alpha: 0.50
+  hedge_alpha_semi_high_d: 0.65
+  hedge_alpha_nlp: 0.35
+  hedge_alpha_semi_nlp: 0.0
+  hedge_alpha_semi_nlp_multi: 0.40
+  robust_latch_unsup_huge: false
+  x_latch_alpha_unsup_huge: 0.90
+  x_latch_max_d: 16
+  contam_trim_frac: 0.025
+  contam_trim_warmup: 12
+  contam_trim_every: 4
+  latch_alpha_unsup_low_d: 0.85
+  nlp_raw_d_min: 700
+  vis_alpha_semi: 0.20
+  disagree_alpha_semi: 0.15
+  hpd_alpha_semi: 0.05
+  hpd_alpha_semi_huge: 0.0
+  c_hedge_alpha_semi: 0.30
+  c_hedge_alpha_semi_huge: 0.0
+  vis_alpha_semi_huge: 0.0
+  disagree_alpha_semi_huge: 0.0
+  bank_weight_semi: false
+  learn_bank_weights: false
+  calix_semi: false
+  contrastive_weight: 0.0
+  latch_shrinkage: false
+  semi_loss_curriculum: false
+  block_prob: 0.25
+  use_interaction: false
+  interaction_rank: 16
+  ensemble_heads: 1
+  true_ensemble: false
+
+  # Throughput for A4000 16GB / ~8 CPU / ~64 GiB (safe HW clamps per-n)
+  # 12288 keeps the A4000 busy on mid-d; OOM halves toward 1024.
+  score_batch_size: 12288
+  score_batch_size_oom_fallback: 1024
+  # Workers=2 on 8-core offer: leave headroom for OMP≈nproc-2 (MCS/CPU path).
+  # 64 GiB RAM is ample; CPU count is the bottleneck, not RAM.
+  dataloader_num_workers: 2
+  tiny_n_safe_hw: true
+  tiny_n_safe_threshold: 250
+  tiny_n_score_batch_size: 512
+  tiny_n_dataloader_num_workers: 0
+  mid_n_safe_hw: true
+  mid_n_score_batch_size: 512
+  mid_n_dataloader_num_workers: 0
+  # Cover/fraud lock: workers=0 / batch=512 (diagnosis). Do not raise for Table-1.
+  huge_n_safe_hw: true
+  huge_n_safe_threshold: 10000
+  huge_n_score_batch_size: 512
+  huge_n_dataloader_num_workers: 0
+  mcs_pack_masks: false
+  vectorized_masks: false
+
+  # SPEAR (classical only; glass skipped via tiny path + profile)
+  # HOLD: no Agnews allow / no NLP gamma / no platt_tail (gap-close never promoted)
+  spear: true
+  spear_gamma: 0.35
+  spear_gamma_nlp: null
+  spear_pairs: 256
+  spear_epochs: 40
+  spear_lr: 0.01
+  spear_hidden: 0
+  spear_classical_only: true
+  spear_soft_ap: false
+  spear_skip_huge_n: true
+  spear_huge_n_threshold: 10000
+  spear_skip_tiny_n: true
+  spear_tiny_n_threshold: 200
+  spear_allow_datasets: []
+  spear_rank_fuse: false
+  spear_fuse: add
+  spear_fuse_nlp: null
+  spear_tail_q: 0.85
+  spear_tail_soft: 0.05
+
+  # RARE (fraud + cover; NEVER backdoor)
+  rare: true
+  rare_gamma: 0.20
+  rare_gamma_cover: 0.12
+  rare_pairs: 256
+  rare_epochs: 40
+  rare_lr: 0.01
+  rare_hidden: 0
+  rare_huge_n_threshold: 10000
+  rare_max_fit_n: 8000
+  rare_skip_cover: false
+  rare_allow_datasets: [fraud, cover]
+
+  # EDGE (CV/NLP; Imdb off)
+  edge: true
+  edge_gamma_cv: 0.15
+  edge_gamma_nlp: 0.10
+  edge_pairs: 256
+  edge_epochs: 30
+  edge_lr: 0.01
+  edge_hidden: 0
+  edge_skip_imdb: true
+  edge_max_fit_n: 6000
+  edge_whiten: false
+  edge_whiten_dim: 64
+  edge_knn_view: false
+  edge_knn_k: 5
+  edge_advanced_allow_datasets: []
+  edge_skip_fashion_advanced: true
+
+  # Frozen OFF (gap-close experiments; do not promote into Table-1)
+  nest: false
+  nest_gamma_cv: 0.10
+  nest_gamma_nlp: 0.08
+  nest_pairs: 256
+  nest_epochs: 30
+  nest_lr: 0.01
+  nest_hidden: 0
+  nest_knn_k: 5
+  nest_skip_imdb: true
+  nest_max_fit_n: 6000
+  cv_knn: false
+  cv_knn_alpha_semi: 0.35
+  cv_knn_memory_cap: 8000
+  cv_knn_neighbors: 5
+  cv_knn_skip_fashion: true
+  cv_knn_allow_datasets: []
+  cv_lof: false
+  cv_lof_allow_datasets: []
+  nlp_lof: false
+  nlp_lof_alpha_semi: 0.35
+  nlp_lof_method: lof
+  nlp_lof_mode: fuse
+  nlp_lof_neighbors: 20
+  nlp_lof_memory_cap: 6000
+  nlp_lof_whiten: false
+  nlp_lof_whiten_dim: 64
+  nlp_lof_allow_datasets: []
+  profile_router: false
+  research_embeds: false
+  ecod: false
+  copod: false
+  goad: false
+  goad_alpha: 0.12
+  goad_transforms: 8
+  goad_epochs: 20
+
+probe:
+  datasets:
+    - breastw
+    - cardio
+    - glass
+    - thyroid
+    - satimage-2
+    - cover
+    - fraud
+    - backdoor
+    - CIFAR10
+    - FashionMNIST
+    - Agnews
+    - Imdb
+  seeds: [111, 222, 333, 444, 555]
+
+final:
+  claim: table1_fair_edge_rare
+  run_id_12: axion_final_12
+  run_id_57: axion_final
+  protocol_jobs: 570
+  paper:
+    unsupervised: {PR-AUC: 32.77, ROC-AUC: 74.08}
+    semi-supervised: {PR-AUC: 61.36, ROC-AUC: 83.17}
+  lock_reference:
+    run_id: axion_g5_edge_rare
+    semi_PR: 55.45
+    unsup_PR: 36.73
+  bans:
+    - no_glass_retune
+    - no_rare_on_backdoor
+    - no_cv_knn
+    - no_nlp_lof
+    - no_spear_allow
+    - no_nest
+    - no_goad
+    - no_alt_embeds_table1
+    - no_e5_table1

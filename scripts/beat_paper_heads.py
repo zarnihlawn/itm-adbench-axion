@@ -318,8 +318,9 @@ def gmm_scores(
 
     X_use = cap_fit(X_fit, cap=8000)
     n = len(X_use)
-    k = int(n_components) if n_components else min(8, max(2, n // 50))
-    k = min(k, max(1, n))
+    # Unset: adaptive mixture (native GMM / ensembles). PCA64 ViT/E5 inject n_components via catalog.
+    k = int(n_components) if n_components is not None else min(8, max(2, n // 50))
+    k = min(max(1, k), max(1, n))
     gmm = GaussianMixture(
         n_components=k,
         covariance_type="diag",

@@ -15,7 +15,9 @@ Mean PR / ROC over ADBench-57 (seed-111, mean-over-variants):
 
 Claim margin (paper+3 on all four): pass. Semi stretch and unsup PR≥45: pass. Unsup ROC 88 remains aspirational.
 
-Canonical artifacts: [`results/axion_beat_paper_dual_lift/`](results/axion_beat_paper_dual_lift/).
+Live replay (same map, full ingredients, seeds 111-555): [`results/axion_beat_paper_dual_lift_gpu/`](results/axion_beat_paper_dual_lift_gpu/).
+Seed-111 snapshot: [`results/axion_beat_paper_dual_lift_gpu111/`](results/axion_beat_paper_dual_lift_gpu111/) (68.05/89.37 and 46.79/84.54).
+Frozen map + historical claim dump: [`results/axion_beat_paper_dual_lift/`](results/axion_beat_paper_dual_lift/).
 
 ## Layout
 
@@ -23,7 +25,9 @@ Canonical artifacts: [`results/axion_beat_paper_dual_lift/`](results/axion_beat_
 .
 ├── README.md
 ├── docs/AXION.md          # Claim detail and full-run recipe
-├── configs/               # default.yaml + gpu_beat_paper.yaml
+├── SETUP_RTX3090.md       # RTX 3090 self-contained ceiling run
+├── configs/               # gpu_beat_paper.yaml + gpu_beat_paper_3090.yaml
+├── data/                  # vendored locally (see data/README.md; not in git)
 ├── src/axion/             # Model and training code
 ├── scripts/               # beat_paper_* + dual_lift assemble
 ├── tests/
@@ -33,30 +37,39 @@ Canonical artifacts: [`results/axion_beat_paper_dual_lift/`](results/axion_beat_
 ## Requirements
 
 - Python ≥ 3.10
-- ADBench datasets as a sibling checkout: `../ADBench/adbench/datasets`
-- Optional: paper AnoDDAE at `../AnoDDAE/`
+- NVIDIA GPU with CUDA for AXION ceiling replay (RTX 3090 profile: [`SETUP_RTX3090.md`](SETUP_RTX3090.md))
+- Local data: `bash scripts/vendor_data.sh` (~4.4 GB into `data/`; not committed to git)
 
 ## Setup
+
+**RTX 3090 / self-contained (recommended):**
 
 ```bash
 git clone git@github.com:zarnihlawn/itm-adbench-axion.git
 cd itm-adbench-axion
+bash scripts/setup_rtx3090.sh
+```
 
-python3 -m venv .venv
-source .venv/bin/activate
+**Minimal (dev):**
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
+bash scripts/vendor_data.sh
 ```
 
 ## Reproduce
 
+Main path is always the ceiling ingredients (whitened embeds, frozen map, AXION on), **all five paper seeds**:
+
 ```bash
 export PYTHONPATH=src:scripts
-
-python scripts/beat_paper_dual_lift_assemble.py --macro
+bash scripts/run_seeds.sh
+python scripts/beat_paper_macro.py --compare-paper --run-id axion_beat_paper_dual_lift_gpu
 python -m pytest tests/test_beat_paper_leap.py -q
 ```
 
-Full 57-dataset rescore later must use the **frozen** recipe map (do not re-select from archived probes). See [`docs/AXION.md`](docs/AXION.md).
+Seed 111 only: `bash scripts/run_seed111.sh`. Do not use `configs/local_seed111.yaml` for claim numbers. See [`docs/AXION.md`](docs/AXION.md).
 
 Locks: `cover` / `fraud` / `backdoor` (+ guards / classical strong) stay on `axion_edge_rare`. No COPOD on locks.
 

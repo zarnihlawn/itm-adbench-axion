@@ -21,18 +21,18 @@ Claim margin (paper+3 all four): pass. Semi stretch 68/88: pass. Unsup PR 45: pa
 | `results/axion_beat_paper_dual_lift/thesis/recipe_map_57_beat.json` | Frozen 57-recipe map |
 | `results/axion_beat_paper/thesis/recipe_map_57_beat.json` | Published copy |
 
-## Full run later
+## Full run (always these ingredients)
 
-Score the **frozen** map (do not re-select):
+Same protocol as the ceiling. Do not use `local_seed111.yaml` or `--skip-axion`.
 
 ```bash
 export PYTHONPATH=src:scripts
-python -u scripts/beat_paper_run.py \
-  --map results/axion_beat_paper_dual_lift/thesis/recipe_map_57_beat.json \
-  --run-id axion_beat_paper_dual_lift --seeds 111 \
-  --settings unsupervised,semi-supervised --skip-axion
-python scripts/beat_paper_dual_lift_assemble.py --assemble --macro --write-map --publish-map
+bash scripts/run_seeds.sh
+python scripts/beat_paper_macro.py --compare-paper --run-id axion_beat_paper_dual_lift_gpu
 ```
+
+Live scores: [`results/axion_beat_paper_dual_lift_gpu/`](../results/axion_beat_paper_dual_lift_gpu/).
+Recipe ids stay frozen in `thesis/recipe_map_57_beat.json`. Do not re-select.
 
 GPU / SPEAR NLP: `bash scripts/run_dual_lift_gpu.sh` when a Vast box is available.
 

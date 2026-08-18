@@ -135,6 +135,8 @@ class RecipeSpec:
     shallow_method: Optional[str] = None
     axion_profile: str = "alt"
     pca_dim: Optional[int] = None
+    # Zoo GMM mixture size when map omits n_components (claim dual_lift default).
+    n_components: Optional[int] = None
     note: str = ""
 
 
@@ -148,6 +150,11 @@ RECIPES: Dict[str, RecipeSpec] = {
     "axion_edge_rare": RecipeSpec(
         "axion_edge_rare", "axion", "native", "gpu_final.yaml",
         axion_profile="edge_rare", note="Classical huge-n + guard lock; cover/fraud RARE",
+    ),
+    # Legacy map id used by metrics_sync for donors/skin semi (native AXION, not edge_rare).
+    "axion": RecipeSpec(
+        "axion", "axion", "native", "gpu_final.yaml",
+        axion_profile="alt", note="Alias for frozen dual_lift map recipe=axion",
     ),
     "shallow_lof_vit": RecipeSpec("shallow_lof_vit", "shallow", "vit", shallow_method="lof", zscore=False),
     "shallow_knn_vit": RecipeSpec("shallow_knn_vit", "shallow", "vit", shallow_method="knn", zscore=False),
@@ -188,11 +195,12 @@ RECIPES: Dict[str, RecipeSpec] = {
     "abod_lite_native": RecipeSpec("abod_lite_native", "zoo", "native", zscore=True, shallow_method="abod_lite"),
     "goad_native": RecipeSpec("goad_native", "zoo", "native", zscore=True, shallow_method="goad"),
     "rank_max_ensemble_native": RecipeSpec("rank_max_ensemble_native", "zoo", "native", zscore=True, shallow_method="rank_max_ensemble"),
-    "gmm_pca32": RecipeSpec("gmm_pca32", "zoo", "native", zscore=True, shallow_method="gmm", pca_dim=32),
-    "gmm_pca64": RecipeSpec("gmm_pca64", "zoo", "native", zscore=True, shallow_method="gmm", pca_dim=64),
-    "gmm_pca64_vit": RecipeSpec("gmm_pca64_vit", "zoo", "vit", zscore=False, shallow_method="gmm", pca_dim=64),
-    "gmm_pca64_e5": RecipeSpec("gmm_pca64_e5", "zoo", "e5", zscore=False, shallow_method="gmm", pca_dim=64),
-    "gmm_pca64_roberta": RecipeSpec("gmm_pca64_roberta", "zoo", "roberta", zscore=False, shallow_method="gmm", pca_dim=64),
+    "gmm_pca32": RecipeSpec("gmm_pca32", "zoo", "native", zscore=True, shallow_method="gmm", pca_dim=32, n_components=1),
+    "gmm_pca64": RecipeSpec("gmm_pca64", "zoo", "native", zscore=True, shallow_method="gmm", pca_dim=64, n_components=1),
+    "gmm_pca64_vit": RecipeSpec("gmm_pca64_vit", "zoo", "vit", zscore=False, shallow_method="gmm", pca_dim=64, n_components=1),
+    # Claim NLP GMM slots predominantly used 2 components after PCA64.
+    "gmm_pca64_e5": RecipeSpec("gmm_pca64_e5", "zoo", "e5", zscore=False, shallow_method="gmm", pca_dim=64, n_components=2),
+    "gmm_pca64_roberta": RecipeSpec("gmm_pca64_roberta", "zoo", "roberta", zscore=False, shallow_method="gmm", pca_dim=64, n_components=1),
     # Leap detectors
     "sod_lite_native": RecipeSpec("sod_lite_native", "zoo", "native", zscore=True, shallow_method="sod_lite"),
     "sod_lite_pca32": RecipeSpec("sod_lite_pca32", "zoo", "native", zscore=True, shallow_method="sod_lite", pca_dim=32),
