@@ -80,7 +80,7 @@ bash scripts/vast_ceiling_setup.sh
 
 ```bash
 # Option A: sibling ../ADBench (classic ITM tree)
-git clone https://github.com/Minqi824/ADBench.git ../ADBench
+git -c http.version=HTTP/1.1 clone --depth 1 https://github.com/Minqi824/ADBench.git ../ADBench
 LINK_IN_REPO=1 bash scripts/clone_adbench.sh
 # datasets: ../ADBench/adbench/datasets
 # YAML:     data/adbench/datasets -> that folder
@@ -93,6 +93,16 @@ ADBENCH_CLONE_DIR=./ADBench LINK_IN_REPO=1 bash scripts/clone_adbench.sh
 # datasets: ./ADBench/adbench/datasets
 # YAML:     data/adbench/datasets -> that folder
 ```
+
+Campus GitHub often fails with `curl 92 HTTP/2 stream ... CANCEL` and `N bytes of body are still expected`. `clone_adbench.sh` forces HTTP/1.1 **for that git command only** (does not change global git config), retries clone 3 times, and retries each NPZ 3 times (GitHub then jihulab). If clone already failed mid-way:
+
+```bash
+rm -rf ../ADBench
+git -c http.version=HTTP/1.1 clone --depth 1 https://github.com/Minqi824/ADBench.git ../ADBench
+ADBENCH_DL_REPO=jihulab LINK_IN_REPO=1 bash scripts/clone_adbench.sh
+```
+
+Or SSH: `git clone git@github.com:Minqi824/ADBench.git ../ADBench`. Do not `git config --global http.version`.
 
 Legacy laptop rsync (not fair eval): `VENDOR_ADBENCH=1 bash scripts/setup_rtx3090.sh`
 

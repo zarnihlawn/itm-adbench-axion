@@ -93,4 +93,12 @@ SKIP_ADBENCH=1 bash scripts/vendor_data.sh
 | In-repo clone | `./ADBench` | `data/adbench/datasets` symlink (`LINK_IN_REPO=1`) |
 | Vendored copy | n/a | `data/adbench/datasets` (real dir from `VENDOR_ADBENCH=1`) |
 
-Outside mainland China use default `ADBENCH_DL_REPO=github`. On campus CN hosts try `ADBENCH_DL_REPO=jihulab`.
+Outside mainland China use default `ADBENCH_DL_REPO=github`. On campus CN hosts try `ADBENCH_DL_REPO=jihulab`. `clone_adbench.sh` uses HTTP/1.1 for git clone/pull **for that command only** (not global git config), retries clone 3 times, and retries each NPZ 3 times.
+
+If clone already failed mid-way (`curl 92 HTTP/2 ... CANCEL`):
+
+```bash
+rm -rf ../ADBench
+git -c http.version=HTTP/1.1 clone --depth 1 https://github.com/Minqi824/ADBench.git ../ADBench
+ADBENCH_DL_REPO=jihulab LINK_IN_REPO=1 bash scripts/clone_adbench.sh
+```
